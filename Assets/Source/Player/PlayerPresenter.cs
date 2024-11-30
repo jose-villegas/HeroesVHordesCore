@@ -1,6 +1,7 @@
-﻿using System;
-using R3;
+﻿using R3;
+using UI;
 using UnityEngine;
+using Zenject;
 
 namespace Player
 {
@@ -8,7 +9,15 @@ namespace Player
     {
         [SerializeField] private PlayerModel playerModel;
         [SerializeField] private PlayerView playerView;
+        
+        private VirtualJoystick _virtualJoystick;
 
+        [Inject]
+        private void Construct(VirtualJoystick joystick)
+        {
+            _virtualJoystick = joystick;
+        }
+        
         public void Start()
         {
             // listen to click hold for movement
@@ -19,7 +28,9 @@ namespace Player
 
         private void OnUserTapAndHold(Unit unit)
         {
-           playerView?.Move(Vector3.back);
+            var speed = playerModel.MoveSpeed;
+            var movement = (Vector3.right + Vector3.forward) * speed;
+           playerView?.Move(movement);
         }
     }
 }

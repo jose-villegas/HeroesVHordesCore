@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Player
 {
@@ -8,17 +9,17 @@ namespace Player
     [Serializable]
     public class PlayerModel : IPlayer
     {
-        private float _moveSpeed;
-        private float _health;
-        private float _maxHealth;
-        private float _level;
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private float health;
+        [SerializeField] private float maxHealth;
+        [SerializeField] private float level;
 
-        public float MoveSpeed => _moveSpeed;
+        public float MoveSpeed => moveSpeed;
 
-        public float Health => _health;
+        public float Health => health;
 
-        public float MaxHealth => _maxHealth;
+        public float MaxHealth => maxHealth;
 
-        public float Level => _level;
+        public float Level => level;
     }
 }

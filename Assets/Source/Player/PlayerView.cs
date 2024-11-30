@@ -4,9 +4,9 @@ namespace Player
 {
     public class PlayerView : MonoBehaviour
     {
-        public void Move(Vector3 position)
+        public void Move(Vector3 movement)
         {
-            transform.position = position;
+            transform.position += movement;
         }
     }
 }
