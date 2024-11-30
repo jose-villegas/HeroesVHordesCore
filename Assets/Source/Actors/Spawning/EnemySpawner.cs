@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Actors.Enemy;
 using Actors.Player;
 using Cysharp.Threading.Tasks;
@@ -14,6 +14,8 @@ namespace Actors.Spawning
 
         private EnemyPresenter.Factory _enemyFactory;
         private PlayerPresenter _playerPresenter;
+
+        private List<EnemyPresenter> _enemies = new List<EnemyPresenter>();
 
         [Inject]
         private void Construct(EnemyPresenter.Factory enemyFactory, PlayerPresenter player)
@@ -59,6 +61,9 @@ namespace Actors.Spawning
                     
                     // set instance position
                     result.transform.position = playerPosition + direction;
+                    
+                    // register spawned enemy
+                    _enemies.Add(result);
                 }
 
                 await UniTask.WaitForSeconds(spawnerModel.Frequency);
