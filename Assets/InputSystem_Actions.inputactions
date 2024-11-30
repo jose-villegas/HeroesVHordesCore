@@ -222,6 +222,17 @@
                 },
                 {
                     "name": "",
+                    "id": "36dce756-a4f4-46f0-994c-667624d5a421",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
