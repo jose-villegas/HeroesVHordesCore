@@ -1,10 +1,9 @@
-﻿namespace Player
+﻿namespace Actors
 {
-    public interface IPlayer
+    public interface IActor
     {
         public float MoveSpeed { get; }
         public float Health { get; }
         public float MaxHealth { get; }
-        public float Level { get; }
     }
 }

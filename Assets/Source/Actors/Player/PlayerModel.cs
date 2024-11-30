@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Player
+namespace Actors.Player
 {
     /// <summary>
     /// Model class for any player entity
