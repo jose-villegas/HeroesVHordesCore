@@ -12,7 +12,7 @@ namespace Actors.Enemy
     {
         [SerializeField] private EnemyModel enemyModel;
         [SerializeField] private EnemyView enemyView;
-        
+
         private PlayerPresenter _playerView;
         private SignalBus _signalBus;
 
@@ -32,7 +32,7 @@ namespace Actors.Enemy
                 .AddTo(_disposables);
 
             Observable.EveryUpdate().Subscribe(_ => MoveTowardsTarget());
-            
+
             // set initial target
             _targetPosition = _playerView.transform.position;
         }
@@ -50,11 +50,15 @@ namespace Actors.Enemy
         private void MoveTowardsTarget()
         {
             Assert.IsNotNull(enemyView);
-            
+
             var direction = _targetPosition - enemyView.transform.position;
             direction.Normalize();
-            
+
             enemyView.Move(direction * enemyModel.MoveSpeed * Time.deltaTime);
+        }
+        
+        public class Factory : PlaceholderFactory<EnemyPresenter>
+        {
         }
     }
 }

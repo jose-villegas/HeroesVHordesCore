@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3259861466561374189}
-  - component: {fileID: 2060681315695355356}
+  - component: {fileID: 2870396390679081005}
   m_Layer: 0
   m_Name: View
   m_TagString: Untagged
@@ -26,14 +26,14 @@ Transform:
   m_GameObject: {fileID: 3601414533956015684}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.04, y: 0, z: 9.64}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1035147752072770039}
   m_Father: {fileID: 3893717693246812522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2060681315695355356
+--- !u!114 &2870396390679081005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3601414533956015684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 168f8df6ec5c4b5e89ef3e341bb97eaf, type: 3}
+  m_Script: {fileID: 11500000, guid: 260e3272e3f948c5b83e019578663217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6836759783295805554
@@ -163,6 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3893717693246812522}
   - component: {fileID: 6817972571776185581}
+  - component: {fileID: 1899621935168657945}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -204,3 +205,23 @@ MonoBehaviour:
   _findSiblingMonoInstallers: 0
   _autoRun: 1
   _kernel: {fileID: 0}
+--- !u!114 &1899621935168657945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097861046303280252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd560de58c74984a2e484f542507218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyModel:
+    moveSpeed: 1
+    health: 50
+    maxHealth: 50
+    damage: 5
+    damageFrequency: 2
+    influenceRadius: 1
+  enemyView: {fileID: 2870396390679081005}

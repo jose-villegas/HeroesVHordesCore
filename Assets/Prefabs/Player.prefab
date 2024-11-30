@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 79852a569d0d7d444924ab374195f8df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 7877024851183077426}
   - component: {fileID: 2162133610276184365}
   - component: {fileID: 5640784910472799902}
+  - component: {fileID: 3813219596936487521}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -176,6 +177,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualJoystick: {fileID: 0}
+--- !u!114 &3813219596936487521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5925655103419637941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02a825eb0dd24cd88c6f1f60671be0ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerModel:
+    moveSpeed: 3
+    health: 100
+    maxHealth: 100
+    level: 1
+  playerView: {fileID: 1990283235573132374}
 --- !u!1 &9079559336158821752
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6533315548502252477}
+  - component: {fileID: 1990283235573132374}
   m_Layer: 0
   m_Name: View
   m_TagString: Untagged
@@ -208,3 +228,15 @@ Transform:
   - {fileID: 7658243857789353072}
   m_Father: {fileID: 7877024851183077426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1990283235573132374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9079559336158821752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168f8df6ec5c4b5e89ef3e341bb97eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
