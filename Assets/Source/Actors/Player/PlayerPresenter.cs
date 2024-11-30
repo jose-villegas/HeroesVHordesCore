@@ -1,6 +1,8 @@
-﻿using UI;
+﻿using Actors.Player.Signals;
+using UI;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Zenject;
 
 namespace Actors.Player
@@ -9,15 +11,17 @@ namespace Actors.Player
     {
         [SerializeField] private PlayerModel playerModel;
         [SerializeField] private PlayerView playerView;
-        
+
         private VirtualJoystick _virtualJoystick;
+        private SignalBus _signalBus;
 
         [Inject]
-        private void Construct(VirtualJoystick joystick)
+        private void Construct(VirtualJoystick joystick, SignalBus signalBus)
         {
             _virtualJoystick = joystick;
+            _signalBus = signalBus;
         }
-        
+
         public void Start()
         {
             // listen to click hold for movement
@@ -31,7 +35,11 @@ namespace Actors.Player
             var speed = playerModel.MoveSpeed;
             var inputDirection = _virtualJoystick.InputDirection;
             var movement = (Vector3.right * inputDirection.x + Vector3.forward * inputDirection.z) * speed;
-           playerView?.Move(movement * Time.deltaTime);
+
+            Assert.IsNotNull(playerView);
+
+            playerView.Move(movement * Time.deltaTime);
+            _signalBus.Fire(new PlayerMovedSignal {Position = playerView.transform.position});
         }
     }
 }
