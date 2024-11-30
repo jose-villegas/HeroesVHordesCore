@@ -15,6 +15,8 @@ namespace Actors.Player
         private VirtualJoystick _virtualJoystick;
         private SignalBus _signalBus;
 
+        public PlayerView View => playerView;
+
         [Inject]
         private void Construct(VirtualJoystick joystick, SignalBus signalBus)
         {

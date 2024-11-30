@@ -332,6 +332,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3473bb3e1da44803a188702bfc9dcb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnerModel:
+    frequency: 5
+    spawnPerCycle: 3
+    delay: 0
+    lifetime: -1
+    distanceFromPlayer: {x: 10, y: 25}
 --- !u!114 &1251433943 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3813219596936487521, guid: 4cc8bfdbd746dd042a8a81aaa66a25f8, type: 3}
