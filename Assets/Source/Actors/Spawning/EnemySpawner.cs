@@ -17,6 +17,8 @@ namespace Actors.Spawning
 
         private List<EnemyPresenter> _enemies = new List<EnemyPresenter>();
 
+        public List<EnemyPresenter> Enemies => _enemies;
+
         [Inject]
         private void Construct(EnemyPresenter.Factory enemyFactory, PlayerPresenter player)
         {

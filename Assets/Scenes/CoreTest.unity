@@ -438,6 +438,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8866046677263840196, guid: 4cc8bfdbd746dd042a8a81aaa66a25f8, type: 3}
+      propertyPath: arcaneWandModel.lifetime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

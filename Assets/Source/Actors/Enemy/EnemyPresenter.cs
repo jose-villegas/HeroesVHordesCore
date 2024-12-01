@@ -13,16 +13,18 @@ namespace Actors.Enemy
         [SerializeField] private EnemyModel enemyModel;
         [SerializeField] private EnemyView enemyView;
 
-        private PlayerPresenter _playerView;
+        private PlayerPresenter _playerPresenter;
         private SignalBus _signalBus;
 
         private Vector3 _targetPosition;
         readonly CompositeDisposable _disposables = new CompositeDisposable();
 
+        public EnemyView View => enemyView;
+
         [Inject]
         private void Construct(PlayerPresenter player, SignalBus signalBus)
         {
-            _playerView = player;
+            _playerPresenter = player;
             _signalBus = signalBus;
         }
 
@@ -34,7 +36,7 @@ namespace Actors.Enemy
             Observable.EveryUpdate().Subscribe(_ => MoveTowardsTarget());
 
             // set initial target
-            _targetPosition = _playerView.transform.position;
+            _targetPosition = _playerPresenter.transform.position;
         }
 
         private void OnDestroy()
@@ -56,7 +58,12 @@ namespace Actors.Enemy
 
             enemyView.Move(direction * enemyModel.MoveSpeed * Time.deltaTime);
         }
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log(other.gameObject.name);
+        }
+
         public class Factory : PlaceholderFactory<EnemyPresenter>
         {
         }
