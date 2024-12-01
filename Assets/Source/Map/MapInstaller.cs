@@ -1,4 +1,5 @@
-﻿using Actors.Player;
+﻿using Actors.Enemy.Signals;
+using Actors.Player;
 using Actors.Player.Signals;
 using Actors.Spawning;
 using ModestTree;
@@ -17,9 +18,12 @@ namespace Map
         {
             Assert.IsNotNull(playerPresenter);
             
+            // signals available
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<PlayerMovedSignal>();
+            Container.DeclareSignal<EnemyKillSignal>();
             
+            // context dependencies
             Container.Bind<PlayerPresenter>().FromInstance(playerPresenter);
             Container.Bind<EnemySpawner>().FromInstance(enemySpawner);
             Container.Bind<Camera>().FromInstance(camera);
