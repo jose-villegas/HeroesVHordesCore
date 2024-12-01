@@ -9,7 +9,7 @@ namespace Actors.Enemy
 
         public override void InstallBindings()
         {
-            Container.Bind<IActor>().FromInstance(enemyPresenter.Model);
+            Container.Bind<EnemyPresenter>().FromInstance(enemyPresenter);
         }
     }
 }

@@ -1,18 +1,13 @@
-﻿using Actors.Enemy;
+﻿using System;
+using Actors.Enemy;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {
-    public class EnemyHealthSlider : MonoBehaviour
+    public class EnemyHealthSlider : ActorHealthSlider<EnemyModel>
     {
-        [SerializeField] private Slider healthSlider;
         [SerializeField] private EnemyPresenter enemyPresenter;
-        
-        private void Update()
-        {
-            var data = enemyPresenter.Model;
-            healthSlider.value = data.Health / data.MaxHealth;
-        }
+
+        protected override EnemyModel GetActor => enemyPresenter.Model;
     }
 }

@@ -12,7 +12,6 @@ namespace Actors.Enemy
         [SerializeField] private float maxHealth;
         [SerializeField] private int damage;
         [SerializeField] private float damageFrequency;
-        [SerializeField] private float influenceRadius;
 
         public float MoveSpeed => moveSpeed;
 
@@ -27,7 +26,5 @@ namespace Actors.Enemy
         public int Damage => damage;
 
         public float DamageFrequency => damageFrequency;
-
-        public float InfluenceRadius => influenceRadius;
     }
 }

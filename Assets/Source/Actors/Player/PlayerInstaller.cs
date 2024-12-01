@@ -12,7 +12,7 @@ namespace Actors.Player
         public override void InstallBindings()
         {
             Container.Bind<VirtualJoystick>().FromInstance(virtualJoystick);
-            Container.Bind<IActor>().FromInstance(playerPresenter.Model);
+            Container.Bind<PlayerPresenter>().FromInstance(playerPresenter);
         }
     }
 }

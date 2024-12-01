@@ -1,4 +1,7 @@
-﻿using Actors.Player.Signals;
+﻿using System;
+using Actors.Enemy;
+using Actors.Player.Signals;
+using Cysharp.Threading.Tasks;
 using UI;
 using UniRx;
 using UnityEngine;
@@ -7,16 +10,11 @@ using Zenject;
 
 namespace Actors.Player
 {
-    public class PlayerPresenter : MonoBehaviour
+    public class PlayerPresenter : ActorPresenter<PlayerModel, PlayerView>
     {
-        [SerializeField] private PlayerModel playerModel;
-        [SerializeField] private PlayerView playerView;
-
         private VirtualJoystick _virtualJoystick;
         private SignalBus _signalBus;
-
-        public PlayerView View => playerView;
-        public PlayerModel Model => playerModel;
+        private bool _lockedForDamage;
 
         [Inject]
         private void Construct(VirtualJoystick joystick, SignalBus signalBus)
@@ -35,14 +33,49 @@ namespace Actors.Player
 
         private void OnUserTapAndHold(long unit)
         {
-            var speed = playerModel.MoveSpeed;
+            var speed = Model.MoveSpeed;
             var inputDirection = _virtualJoystick.InputDirection;
             var movement = (Vector3.right * inputDirection.x + Vector3.forward * inputDirection.z) * speed;
 
-            Assert.IsNotNull(playerView);
+            Assert.IsNotNull(View);
 
-            playerView.Move(movement * Time.deltaTime);
-            _signalBus.Fire(new PlayerMovedSignal {Position = playerView.transform.position});
+            View.Move(movement * Time.deltaTime);
+            _signalBus.Fire(new PlayerMovedSignal {Position = View.transform.position});
+        }
+
+        private async void OnTriggerEnter(Collider other)
+        {
+            var enemyPresenter = other.attachedRigidbody.GetComponent<EnemyPresenter>();
+
+            if (enemyPresenter == null || _lockedForDamage) return;
+
+            _lockedForDamage = true;
+
+            Model.Health -= enemyPresenter.Model.Damage;
+
+            // Game Over
+            if (Model.Health <= 0)
+            {
+                _lockedForDamage = false;
+                QuitGame();
+                return;
+            }
+
+            await UniTask.WaitForSeconds(enemyPresenter.Model.DamageFrequency);
+
+            _lockedForDamage = false;
+        }
+
+        public void QuitGame()
+        {
+            // save any game data here
+#if UNITY_EDITOR
+            // Application.Quit() does not work in the editor so
+            // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
         }
     }
 }

@@ -12,11 +12,8 @@ using Zenject;
 
 namespace Actors.Enemy
 {
-    public class EnemyPresenter : MonoBehaviour
+    public class EnemyPresenter : ActorPresenter<EnemyModel, EnemyView>
     {
-        [SerializeField] private EnemyModel enemyModel;
-        [SerializeField] private EnemyView enemyView;
-
         private PlayerPresenter _playerPresenter;
         private SignalBus _signalBus;
 
@@ -25,9 +22,6 @@ namespace Actors.Enemy
         private IDisposable _observable;
         private bool _lockFurtherHits;
         private EnemySpawner _enemySpawner;
-
-        public EnemyView View => enemyView;
-        public EnemyModel Model => enemyModel;
 
         [Inject]
         private void Construct(PlayerPresenter player, SignalBus signalBus, EnemySpawner enemySpawner)
@@ -60,12 +54,12 @@ namespace Actors.Enemy
 
         private void MoveTowardsTarget()
         {
-            Assert.IsNotNull(enemyView);
+            Assert.IsNotNull(View);
 
-            var direction = _targetPosition - enemyView.transform.position;
+            var direction = _targetPosition - View.transform.position;
             direction.Normalize();
 
-            enemyView.Move(direction * enemyModel.MoveSpeed * Time.deltaTime);
+            View.Move(direction * Model.MoveSpeed * Time.deltaTime);
         }
 
         private async void OnTriggerStay(Collider other)
@@ -83,9 +77,9 @@ namespace Actors.Enemy
             }
 
             // reduce health given the projectile damage
-            enemyModel.Health -= projectilePresenter.Weapon.Damage;
+            Model.Health -= projectilePresenter.Weapon.Damage;
 
-            if (enemyModel.Health <= 0)
+            if (Model.Health <= 0)
             {
                 _enemySpawner.CleanUp(this);
                 Destroy(gameObject);
