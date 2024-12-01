@@ -4,6 +4,11 @@ namespace Actors.Player.Signals
 {
     public class PlayerMovedSignal
     {
-        public Vector3 Position { get; set; }
+        public PlayerMovedSignal(Vector3 position)
+        {
+            Position = position;
+        }
+
+        public Vector3 Position { get; }
     }
 }

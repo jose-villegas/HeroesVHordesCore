@@ -21,6 +21,8 @@ namespace Map
             // signals available
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<PlayerMovedSignal>();
+            Container.DeclareSignal<PlayerExperienceIncreaseSignal>();
+            Container.DeclareSignal<PlayerLevelIncreaseSignal>();
             Container.DeclareSignal<EnemyKillSignal>();
             
             // context dependencies

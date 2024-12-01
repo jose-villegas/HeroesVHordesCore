@@ -82,7 +82,7 @@ namespace Actors.Enemy
 
             if (Model.Health <= 0)
             {
-                _signalBus.Fire(new EnemyKillSignal { Model = Model });
+                _signalBus.Fire(new EnemyKillSignal(Model));
                 _enemySpawner.CleanUp(this);
                 Destroy(gameObject);
                 return;

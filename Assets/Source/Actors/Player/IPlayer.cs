@@ -2,6 +2,6 @@
 {
     public interface IPlayer : IActor
     {
-        public float Level { get; }
+        public int Level { get; set; }
     }
 }

@@ -12,7 +12,8 @@ namespace Actors.Player
         [SerializeField] private float moveSpeed;
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
-        [SerializeField] private float level;
+        [SerializeField] private int level;
+        [SerializeField] private int experience;
 
         public float MoveSpeed => moveSpeed;
 
@@ -24,6 +25,16 @@ namespace Actors.Player
 
         public float MaxHealth => maxHealth;
 
-        public float Level => level;
+        public int Level
+        {
+            get => level;
+            set => level = value;
+        }
+
+        public int Experience
+        {
+            get => experience;
+            set => experience = value;
+        }
     }
 }

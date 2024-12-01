@@ -227,6 +227,7 @@ MonoBehaviour:
     maxHealth: 50
     damage: 15
     damageFrequency: 0.75
+    experienceReward: 5
   view: {fileID: 2870396390679081005}
 --- !u!114 &1451825590289114826
 MonoBehaviour:

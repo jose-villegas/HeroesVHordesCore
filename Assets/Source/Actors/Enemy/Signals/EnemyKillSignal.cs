@@ -2,6 +2,11 @@
 {
     public class EnemyKillSignal
     {
-        public EnemyModel Model { get; set; }
+        public EnemyKillSignal(EnemyModel model)
+        {
+            Model = model;
+        }
+
+        public EnemyModel Model { get; }
     }
 }

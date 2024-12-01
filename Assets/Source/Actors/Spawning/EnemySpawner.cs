@@ -49,7 +49,9 @@ namespace Actors.Spawning
 
             while (true)
             {
-                for (int i = 0; i < spawnerModel.SpawnPerCycle; i++)
+                var extra = Mathf.Sqrt(_playerPresenter.Model.Level);
+                
+                for (int i = 0; i < spawnerModel.SpawnPerCycle + extra; i++)
                 {
                     var result = _enemyFactory.Create();
                     var playerPosition = _playerPresenter.View.transform.position;

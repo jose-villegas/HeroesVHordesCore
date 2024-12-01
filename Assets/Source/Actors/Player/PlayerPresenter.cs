@@ -1,7 +1,9 @@
 ﻿using System;
 using Actors.Enemy;
+using Actors.Enemy.Signals;
 using Actors.Player.Signals;
 using Cysharp.Threading.Tasks;
+using Extensions;
 using UI;
 using UniRx;
 using UnityEngine;
@@ -16,6 +18,8 @@ namespace Actors.Player
         private SignalBus _signalBus;
         private bool _lockedForDamage;
 
+        readonly CompositeDisposable _disposables = new CompositeDisposable();
+
         [Inject]
         private void Construct(VirtualJoystick joystick, SignalBus signalBus)
         {
@@ -27,8 +31,36 @@ namespace Actors.Player
         {
             // listen to click hold for movement
             var tapStream = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(0) || Input.GetMouseButton(0));
+            _signalBus.GetStream<EnemyKillSignal>().Subscribe(x => OnEnemyKill(x.Model))
+                .AddTo(_disposables);
 
-            tapStream.Subscribe(OnUserTapAndHold);
+            tapStream.Subscribe(OnUserTapAndHold).AddTo(_disposables);
+        }
+
+        private void OnEnemyKill(EnemyModel model)
+        {
+            var previousExperience = Model.Experience;
+            Model.Experience += model.ExperienceReward;
+            
+            _signalBus.Fire(new PlayerExperienceIncreaseSignal(previousExperience, Model));
+
+            // check if we have level up
+            var nextLevel = Model.Level + 5;
+            // required experience
+            var requiredExp = Fibonacci.Calculate(nextLevel);
+
+            // we have leveled up
+            if (Model.Experience >= requiredExp)
+            {
+                Model.Level++;
+                Model.Experience = 0;
+                _signalBus.Fire(new PlayerLevelIncreaseSignal(Model));
+            }
+        }
+
+        private void OnDestroy()
+        {
+            _disposables.Dispose();
         }
 
         private void OnUserTapAndHold(long unit)
@@ -40,7 +72,7 @@ namespace Actors.Player
             Assert.IsNotNull(View);
 
             View.Move(movement * Time.deltaTime);
-            _signalBus.Fire(new PlayerMovedSignal {Position = View.transform.position});
+            _signalBus.Fire(new PlayerMovedSignal(View.transform.position));
         }
 
         private async void OnTriggerEnter(Collider other)

@@ -1,4 +1,5 @@
 ﻿using System;
+using Actors.Player;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Weapon.Projectile;
@@ -10,13 +11,15 @@ namespace Weapon
     {
         [SerializeField] private ArcaneWandModel arcaneWandModel;
         private ProjectileSpawner _projectileSpawner;
+        private PlayerPresenter _playerPresenter;
 
         public ArcaneWandModel WandModel => arcaneWandModel;
 
         [Inject]
-        public void Construct(ProjectileSpawner projectileSpawner)
+        public void Construct(ProjectileSpawner projectileSpawner, PlayerPresenter playerPresenter)
         {
             _projectileSpawner = projectileSpawner;
+            _playerPresenter = playerPresenter;
         }
 
         private void Start()
@@ -28,7 +31,9 @@ namespace Weapon
         {
             while (true)
             {
-                _projectileSpawner.SpawnProjectiles(arcaneWandModel.ProjectileCount, arcaneWandModel.Lifetime);
+                var extra = _playerPresenter.Model.Level / 2;
+
+                _projectileSpawner.SpawnProjectiles(arcaneWandModel.ProjectileCount + extra, arcaneWandModel.Lifetime);
                 await UniTask.WaitForSeconds(arcaneWandModel.Frequency);
             }
         }
