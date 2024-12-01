@@ -1,9 +1,13 @@
 ﻿using System;
 using Actors.Player;
 using Actors.Player.Signals;
+using Actors.Spawning;
+using Cysharp.Threading.Tasks;
 using UniRx;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Weapon.Projectile;
 using Zenject;
 
 namespace Actors.Enemy
@@ -18,14 +22,19 @@ namespace Actors.Enemy
 
         private Vector3 _targetPosition;
         readonly CompositeDisposable _disposables = new CompositeDisposable();
+        private IDisposable _observable;
+        private bool _lockFurtherHits;
+        private EnemySpawner _enemySpawner;
 
         public EnemyView View => enemyView;
+        public EnemyModel Model => enemyModel;
 
         [Inject]
-        private void Construct(PlayerPresenter player, SignalBus signalBus)
+        private void Construct(PlayerPresenter player, SignalBus signalBus, EnemySpawner enemySpawner)
         {
             _playerPresenter = player;
             _signalBus = signalBus;
+            _enemySpawner = enemySpawner;
         }
 
         private void Start()
@@ -33,7 +42,7 @@ namespace Actors.Enemy
             _signalBus.GetStream<PlayerMovedSignal>().Subscribe(x => UpdateTargetPosition(x.Position))
                 .AddTo(_disposables);
 
-            Observable.EveryUpdate().Subscribe(_ => MoveTowardsTarget());
+            _disposables.Add(Observable.EveryUpdate().Subscribe(_ => MoveTowardsTarget()));
 
             // set initial target
             _targetPosition = _playerPresenter.transform.position;
@@ -59,9 +68,32 @@ namespace Actors.Enemy
             enemyView.Move(direction * enemyModel.MoveSpeed * Time.deltaTime);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private async void OnTriggerStay(Collider other)
         {
-            Debug.Log(other.gameObject.name);
+            if (_lockFurtherHits) return;
+
+            _lockFurtherHits = true;
+
+            var projectilePresenter = other.GetComponent<ProjectilePresenter>();
+
+            if (projectilePresenter == null)
+            {
+                _lockFurtherHits = false;
+                return;
+            }
+
+            // reduce health given the projectile damage
+            enemyModel.Health -= projectilePresenter.Weapon.Damage;
+
+            if (enemyModel.Health <= 0)
+            {
+                _enemySpawner.CleanUp(this);
+                Destroy(gameObject);
+                return;
+            }
+
+            await UniTask.WaitForSeconds(.25f);
+            _lockFurtherHits = false;
         }
 
         public class Factory : PlaceholderFactory<EnemyPresenter>

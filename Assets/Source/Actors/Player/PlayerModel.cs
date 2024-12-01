@@ -16,7 +16,11 @@ namespace Actors.Player
 
         public float MoveSpeed => moveSpeed;
 
-        public float Health => health;
+        public float Health
+        {
+            get => health;
+            set => health = value;
+        }
 
         public float MaxHealth => maxHealth;
 

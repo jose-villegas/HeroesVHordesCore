@@ -442,7 +442,9 @@ PrefabInstance:
       propertyPath: arcaneWandModel.lifetime
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5778533823257258116, guid: 4cc8bfdbd746dd042a8a81aaa66a25f8, type: 3}
+    - {fileID: 3414268337646976075, guid: 4cc8bfdbd746dd042a8a81aaa66a25f8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -10,6 +10,8 @@ namespace Weapon.Projectile
         private IProjectileWeapon _weapon;
         private Vector3 _direction;
 
+        public IProjectileWeapon Weapon => _weapon;
+
         [Inject]
         private void Construct(Vector3 targetPosition, IProjectileWeapon weapon)
         {

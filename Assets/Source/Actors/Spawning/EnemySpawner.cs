@@ -31,6 +31,11 @@ namespace Actors.Spawning
             SpawnEnemies().Forget();
         }
 
+        public void CleanUp(EnemyPresenter presenter)
+        {
+            _enemies.RemoveAll(x => x == presenter);
+        }
+
         private async UniTask SpawnEnemies()
         {
             var startingTime = Time.time;

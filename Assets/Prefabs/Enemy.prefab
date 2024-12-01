@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3259861466561374189}
   - component: {fileID: 2870396390679081005}
+  - component: {fileID: 3524764814295612640}
   m_Layer: 8
   m_Name: View
   m_TagString: Untagged
@@ -46,6 +47,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260e3272e3f948c5b83e019578663217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3524764814295612640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3601414533956015684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed60fbdcf7f6a464b963f175792f72f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 7074457028331656792}
+  enemyPresenter: {fileID: 1899621935168657945}
 --- !u!1 &6836759783295805554
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,6 +72,7 @@ GameObject:
   - component: {fileID: 1035147752072770039}
   - component: {fileID: 3640763228049747591}
   - component: {fileID: 2675698628842416163}
+  - component: {fileID: 5104635471418099602}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
@@ -132,6 +148,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5104635471418099602
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836759783295805554}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.99999994, y: 1, z: 0.99999994}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7097861046303280252
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,8 +180,8 @@ GameObject:
   - component: {fileID: 3893717693246812522}
   - component: {fileID: 6817972571776185581}
   - component: {fileID: 1899621935168657945}
-  - component: {fileID: 4358597818235590186}
-  - component: {fileID: 4635437310590971278}
+  - component: {fileID: 1451825590289114826}
+  - component: {fileID: 1063991014883575553}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -181,7 +218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 1451825590289114826}
   _installerPrefabs: []
   _findSiblingMonoInstallers: 0
   _autoRun: 1
@@ -206,30 +244,20 @@ MonoBehaviour:
     damageFrequency: 2
     influenceRadius: 1
   enemyView: {fileID: 2870396390679081005}
---- !u!136 &4358597818235590186
-CapsuleCollider:
+--- !u!114 &1451825590289114826
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7097861046303280252}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &4635437310590971278
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e997a5c31c3f438eb398ec475bbef6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPresenter: {fileID: 1899621935168657945}
+--- !u!54 &1063991014883575553
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -264,18 +292,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3259861466561374189}
     m_Modifications:
-    - target: {fileID: 1143570909442542204, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398179378650407038, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1504763312704425544, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
+    - target: {fileID: 1896527392044606502, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
+      propertyPath: enemyPresenter
+      value: 
+      objectReference: {fileID: 1899621935168657945}
     - target: {fileID: 4926224950541876847, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -372,22 +392,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 6621736374614275673, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6853676025989795730, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7800693582784069021, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8381633888962113311, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -398,3 +402,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5884830172798957467, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
   m_PrefabInstance: {fileID: 809196901243281043}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7074457028331656792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7572623983389608139, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
+  m_PrefabInstance: {fileID: 809196901243281043}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

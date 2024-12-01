@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualJoystick: {fileID: 0}
+  playerPresenter: {fileID: 3813219596936487521}
 --- !u!114 &3813219596936487521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,18 +566,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6533315548502252477}
     m_Modifications:
-    - target: {fileID: 1143570909442542204, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398179378650407038, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1504763312704425544, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 4926224950541876847, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -672,22 +661,6 @@ PrefabInstance:
     - target: {fileID: 6621736374614275673, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
       propertyPath: m_Name
       value: HealthCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6621736374614275673, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6853676025989795730, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7800693582784069021, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8381633888962113311, guid: 66d872e72bfc15949900217a6b2d95f1, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

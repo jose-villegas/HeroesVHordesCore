@@ -33,12 +33,14 @@ namespace Weapon.Projectile
             var enemies = _enemySpawner.Enemies;
 
             if (enemies == null || enemies.Count == 0) return;
+            
+            var pCount = Mathf.Min(enemies.Count, projectileCount);
 
             var sortedEnemies = enemies
                 .OrderBy(x => Vector3.SqrMagnitude(playerPosition - x.transform.position))
                 .ToList();
-
-            for (int i = sortedEnemies.Count() - 1; i >= 0 || sortedEnemies.Count() - i >= projectileCount; i--)
+            
+            for (int i = 0; pCount > 0; i++, pCount--)
             {
                 var instance = _projectileFactory.Create(sortedEnemies[i].View.transform.position,
                     _arcaneWandPresenter.WandModel);
